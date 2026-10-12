@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>نموذج تسجيل دخول</title>
+    <style>
+        body {
+            font-family: "Tahoma", sans-serif;
+            background: linear-gradient(135deg, #1f2933, #111827);
+            color: #f9fafb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: rgba(17, 24, 39, 0.95);
+            padding: 30px 40px;
+            border-radius: 18px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            width: 380px;
+            backdrop-filter: blur(10px);
+        }
+
+        .card h1 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        .field label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #d1d5db;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid #4b5563;
+            background: #111827;
+            color: #f9fafb;
+            outline: none;
+            transition: border 0.2s, box-shadow 0.2s;
+        }
+
+        .field input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 1px #3b82f6;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 11px;
+            border-radius: 999px;
+            border: none;
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(59,130,246,0.4);
+            opacity: 0.95;
+        }
+
+        .msg {
+            margin-top: 15px;
+            font-size: 13px;
+            text-align: center;
+            color: #9ca3af;
+            min-height: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>تسجيل مستخدم جديد</h1>
+        <form id="registerForm">
+            <div class="field">
+                <label for="username">اسم المستخدم</label>
+                <input type="text" id="username" name="username" placeholder="مثال: hacker_legend" required>
+            </div>
+
+            <div class="field">
+                <label for="password">كلمة المرور</label>
+                <input type="password" id="password" name="password" placeholder="اختر كلمة قوية" required>
+            </div>
+
+            <div class="field">
+                <label for="age">العمر</label>
+                <input type="number" id="age" name="age" min="10" max="90" placeholder="مثال: 21">
+            </div>
+
+            <div class="field">
+                <label for="job">المهنة</label>
+                <input type="text" id="job" name="job" placeholder="مثال: مختبر ثغرات">
+            </div>
+
+            <div class="field">
+                <label for="city">المدينة</label>
+                <input type="text" id="city" name="city" placeholder="مثال: مكة">
+            </div>
+
+            <button type="submit" class="btn">إنشاء الحساب</button>
+            <div class="msg" id="msg"></div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('registerForm');
+        const msg = document.getElementById('msg');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const username = form.username.value.trim();
+            const age = form.age.value.trim();
+
+            if (username.length < 3) {
+                msg.textContent = "اسم المستخدم يجب أن يكون 3 أحرف فأكثر.";
+                msg.style.color = "#f97373";
+                return;
+            }
+
+            if (age && (age < 10 || age > 90)) {
+                msg.textContent = "العمر يجب أن يكون بين 10 و 90.";
+                msg.style.color = "#f97373";
+                return;
+            }
+
+            msg.textContent = "تم تسجيل الحساب بشكل مبدئي (محاكاة فقط).";
+            msg.style.color = "#34d399";
+
+            // هنا ممكن تربط الطلب بـ API حقيقية أو سيرفر
+            console.log("Data:", {
+                username: form.username.value,
+                password: form.password.value,
+                age: form.age.value,
+                job: form.job.value,
+                city: form.city.value
+            });
+        });
+    </script>
+</body>
+</html>
+
